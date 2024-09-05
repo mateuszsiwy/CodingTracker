@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CodingTrackerv2": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\matro\\C#\\Console Apps\\CodingTrackerv2\\CodingTrackerv2"
+    }
+  }
+}
