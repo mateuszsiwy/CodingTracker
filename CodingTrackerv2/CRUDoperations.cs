@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spectre.Console;
-
+using CodingTrackerv2;
 namespace CodingTracker
 {
     internal class CRUDoperations
@@ -97,6 +97,11 @@ namespace CodingTracker
                 {
                     
                     string idRemove = Console.ReadLine();
+                    if (!Validation.isNumberValid(idRemove))
+                    {
+                        Console.WriteLine("Id is not valid!");
+                        continue;
+                    }
                     id = int.Parse(idRemove);
                     string checkQuery = "SELECT COUNT(*) FROM coding_tracker WHERE Id = @Id";
                     int rowCount;
@@ -116,7 +121,7 @@ namespace CodingTracker
                 }
                 catch
                 {
-                    Console.WriteLine("Please enter a valid id");
+                    Console.WriteLine("Please enter a id that is in the database");
                 }
             }
 
@@ -134,18 +139,12 @@ namespace CodingTracker
             {
                 Console.WriteLine("Please enter the date in the following format (dd-MM-yy HH:mm)");
                 string? date = Console.ReadLine();
-                string format = "dd-MM-yy HH:mm";
-                DateTime dateValue;
-                bool isValidDate = DateTime.TryParseExact(date, format, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None,
-                    out dateValue);
-                if (isValidDate)
+                if (!Validation.isDateValid(date))
                 {
-                    return date;
+                    Console.WriteLine("Entered date is in the wrong format!");
+                    continue;
                 }
-                else
-                {
-                    Console.WriteLine("Please enter the date in the correct format!");
-                }
+                return date;
             }
         }
     }
